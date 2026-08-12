@@ -1,0 +1,19 @@
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: lightgray;
+}
+
+footer {
+    background-color:aquamarine ;
+}
+
+section.content {
+    display: flex;
+    flex-grow: 1;
+    background-color: blanchedalmond;
+}

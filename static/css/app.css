@@ -1,16 +1,49 @@
 @font-face {
-    font-family: "Poppins";
-    src: url("../fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+    font-family: "Instrument Sans";
+    src: url("../fonts/instrument_sans/InstrumentSans-Medium.ttf");
+    font-weight: 400;
 }
 
-@font-face {
-    font-family: "Poppins";
-    src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
-    font-weight: 700;
-}
+
 
 :root {
-    --font-main: "Poppins", sans-serif;
+    /* Police */
+    --font-main: "InstrumentSans", sans-serif;
+
+    /* Couleurs principales */
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-primary-light: #dbeafe;
+
+    /* Background */
+    --color-background: #f8fafc;
+    --color-white: #ffffff;
+
+    /* Gris */
+    --color-gray-100: #f1f5f9;
+    --color-gray-200: #e2e8f0;
+    --color-gray-300: #cbd5e1;
+    --color-gray-500: #64748b;
+    --color-gray-700: #334155;
+    --color-gray-900: #0f172a;
+
+    /* Texte */
+    --color-text: #1e293b;
+    --color-text-light: #64748b;
+
+    /* Bordures */
+    --color-border: #e2e8f0;
+
+    /* Bordures arrondies */
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+
+    /* Ombres */
+    --shadow-sm: 0 1px 3px #0000001a;
+    --shadow-md: 0 4px 6px #0000001a;
+
+    /* Transition */
+    --transition: 0.2s ease;
 }
 
 * {
@@ -21,6 +54,12 @@
 
 body {
     font-family: var(--font-main);
-    font-size: 15px;
     line-height: 1.5;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }

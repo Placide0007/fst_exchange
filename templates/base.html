@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     {% block css %}{% endblock css %}
+    <title>{% block title %}{% endblock title %}</title>
 </head>
+
 <body>
     <main>
         {% include 'includes/header.html' %}
+
         <section class="content">
-            {% block content %}{% endblock content %}    
+            {% block content %}{% endblock content %}
         </section>
+
         {% include 'includes/footer.html' %}
     </main>
 </body>

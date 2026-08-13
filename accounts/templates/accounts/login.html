@@ -11,5 +11,25 @@
 {% endblock title %}
 
 {% block content %}
-    <p>login page</p>
+    <div class="auth-big-container" >
+
+        <a class="to-home" href="{% url 'home' %}">to Home page</a>
+
+        <div class="form-container">
+            <form action="" method="post">
+                <p class="title" >Connexion</p>
+                <div>
+                    <input type="text" placeholder="Pseudo" name="username">
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Mot de passe">
+                </div>
+                <button>Se connecter</button>
+                <div class="alternativ-link">
+                    <p>Pas de compte?</p>
+                    <a href="{% url 'register' %}">S'inscrire</a>
+                </div>
+            </form>
+    </div>
+    </div>
 {% endblock %}

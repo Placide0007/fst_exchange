@@ -1,10 +1,35 @@
 <header>
     <nav class="navbar">
-        <a class="navbar-brand" href="">LOGO</a>
-        <a href="">Accueil</a>
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            LOGO
+        </a>
+
+        <a href="{% url 'home' %}">Accueil</a>
+
         <a href="">Blog</a>
-        <a href="">Parcours</a>
-        <a href="">Profile</a>
+
+        <div class="dropdown">
+            <button class="dropdown-btn">
+                Parcours
+            </button>
+
+            <div class="dropdown-content">
+                <a href="{% url 'math' %}">
+                    Mathématiques Informatique
+                </a>
+
+                <a href="{% url 'pc' %}">
+                    Physique Chimie
+                </a>
+            </div>
+        </div>
+
+        <a href="{% url 'profile' %}">Profile</a>
+
     </nav>
-    <a class="login" href="{% url 'login' %}">Se connecter</a>
+
+    <a class="login" href="{% url 'login' %}">
+        Se connecter
+    </a>
 </header>

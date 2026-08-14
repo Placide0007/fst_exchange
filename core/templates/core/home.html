@@ -64,12 +64,20 @@
         
                 <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
         
-                <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
+                <div class="flex justify-between items-center border-t border-slate-100 pt-2" >
                     <span class="text-xs">13 Aug 2026</span>
-                    <button class="flex  gap-1 p-1 rounded" >
-                        <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
-                        <span>23</span>
-                    </button>
+                    
+                    <div class="flex justify-center gap-2 items-center" >
+                        <button class="flex  gap-1 justify-center  items-center p-2  border border-slate-200 rounded" >
+                                <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4">
+                                <span class="text-xs" >23</span>
+                        </button>
+
+                        <button class="flex  gap-1 justify-center  items-center p-2  border border-slate-200 rounded"  >
+                            <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
+                            <span class="text-xs" >3</span>
+                        </button>
+                    </div>
                 </div>
         
             </div>

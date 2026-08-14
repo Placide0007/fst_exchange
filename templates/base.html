@@ -11,8 +11,12 @@
   </head>
 
   <body>
-    <section class="content">
-      {% block content %} {% endblock content %}
-    </section>
+   <main class="flex flex-col min-h-screen" >
+        {% include 'includes/header.html' %}
+        <section class="content grow bg-slate-100">
+            {% block content %} {% endblock content %}
+        </section>
+        {% include 'includes/footer.html' %}
+   </main>
   </body>
 </html>

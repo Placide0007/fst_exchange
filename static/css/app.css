@@ -3,19 +3,19 @@
     src: url("../fonts/poppins/Poppins-Regular.ttf") format("truetype");
 }
 
+*:not(button) {
+    border-radius: 3px;
+}
+
 
 body {
     font-family: "Poppins", sans-serif;
     font-size: 14px;
 }
 
-input {
-    border-radius: 0;
-}
-
 
 ::-webkit-scrollbar {
-    width: 7px; 
+    width: 7px;
 }
 
 ::-webkit-scrollbar-track {

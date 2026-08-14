@@ -1,9 +1,9 @@
-<header class="flex justify-between items-center px-10 py-2 border-slate-100 border">
+<header class="flex justify-between items-center px-25 py-2 border-slate-300 border">
     <p class="font-bold text-xl" >LOGO</p>
     <nav class="flex gap-10" >
-        <a href="">Accueil</a>
-        <a href="">A propos</a>
-        <a href="">Profile</a>
+        <a href="{% url 'home' %}">Accueil</a>
+        <a href="{% url 'about' %}">A propos</a>
+        <a href="{% url 'profile' %}">Profile</a>
     </nav>
     <a class="text-xs border-slate-100 p-2 border" href="{% url 'login' %}">Se Connecter</a>
 </header>

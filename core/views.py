@@ -7,3 +7,9 @@ def home(request):
 def profile(request):
     return render(request,'core/profile.html')
 
+def about(request):
+    return render(request,'core/about.html')
+
+
+
+

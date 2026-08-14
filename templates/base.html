@@ -15,10 +15,13 @@
 
     <link rel="stylesheet" href="{% static 'vendor/waves/waves.min.css' %}" />
 
+    <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+
     {% tailwind_css %} {% block css %}{% endblock css %}
   </head>
 
   <body>
+
     <main class="flex min-h-screen flex-col">
       {% include 'includes/header.html' %}
 
@@ -31,8 +34,15 @@
 
     <script src="{% static 'vendor/waves/waves.min.js' %}"></script>
 
-    <script src="{% static 'vendor/js/config.js' %}"></script>
+    <script src="{% static 'vendor/js/waves-config.js' %}"></script>
+
+  <!-- AOS JS -->
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+
+    <script src="{% static 'vendor/js/aos-config.js' %}"></script>
 
     {% block js %} {% endblock js %}
+
   </body>
+
 </html>

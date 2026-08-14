@@ -22,7 +22,7 @@
 
         <div class="flex gap-5 justify-center items-center py-4 " >
             <input class="mt-1 border bg-white border-slate-500 p-2 w-full" type="text" placeholder="Ex:python" name="">
-            <button class="bg-slate-800 text-white p-2 cursor-pointer" >Recherche</button>
+            <button class="bg-slate-800 text-xs text-white p-2 cursor-pointer" >Recherche</button>
         </div>
 
         <div class="flex gap-2 items-center" >
@@ -39,35 +39,38 @@
     
 </div>
 
-<div id="jumbotron" class="py-5 px-15">
+<div id="blog" class="py-5 px-15">
 
     <div class="my-4" >
         <button class=" text-xl underline-offset-4 underline p-1 rounded " >Publication & Actualites</button>
     </div>
-    <a class="grid grid-cols-3 gap-5" href="">
 
-        <div class="flex flex-col rounded gap-3 border shadow-sm bg-white border-slate-300 p-5" >
+    <div class="grid grid-cols-3 gap-5" >
+        <a  href="">
     
-            <div class="flex justify-between items-center py-2" >
-                <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
-                <span class="text-xs" >6min</span>
+            <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+        
+                <div class="flex justify-between items-center py-2" >
+                    <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
+                    <span class="text-xs" >6min</span>
+                </div>
+        
+                <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
+        
+                <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
+        
+                <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
+                    <span class="text-xs">13 Aug 2026</span>
+                    <button class="flex gap-1 p-1 rounded" >
+                        <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
+                        <span>23</span>
+                    </button>
+                </div>
+        
             </div>
+        </a>
+    </div>
     
-            <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
-    
-            <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
-    
-            <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
-                <span class="text-xs">13 Aug 2026</span>
-                <button class="flex gap-1 p-1 rounded" >
-                    <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
-                    <span>23</span>
-                </button>
-            </div>
-    
-        </div>
-    </a>
-
 </div>
 
 {% endblock content %}

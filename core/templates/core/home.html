@@ -10,7 +10,7 @@
 
 {% comment %} hero section  {% endcomment %}
 
-<div id="hero" class="grid border-b bg-white border-slate-300  grid-cols-2" >
+<div id="hero" class="grid border-b z-0 bg-white border-slate-300  grid-cols-2" >
 
     <div  class="flex p-20 flex-col gap-3" >
 
@@ -22,9 +22,13 @@
 
         <p class="text-xs" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus illum ipsa animi dolor, dolore dicta pariatur quibusdam laborum, voluptatem itaque molestiae explicabo dolores sit suscipit nulla expedita eum maiores?</p>
 
-        <div class="flex gap-10" >
-            <a class=" border-slate-400 p-2 border" href="{% url 'login' %}">Se Connecter</a>
-            <a class=" bg-slate-900 text-gray-200 p-2 border">Explorer le blog</a>
+        <div class="flex gap-10" > 
+            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border" href="{% url 'login' %}"> 
+                Se Connecter 
+            </a> 
+            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border" href="{% url 'blog' %}"> 
+                Explorer le blog 
+            </a> 
         </div>
 
     </div>
@@ -44,29 +48,32 @@
     <div class="my-4" >
         <button class=" text-xl underline-offset-4 underline p-1 rounded " >Publication & Actualites</button>
     </div>
-    <a class="grid grid-cols-3 gap-5" href="">
 
-        <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+    <div class="grid grid-cols-3 gap-5" >
+        <a  href="">
     
-            <div class="flex justify-between items-center py-2" >
-                <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
-                <span class="text-xs" >6min</span>
+            <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+        
+                <div class="flex justify-between items-center py-2" >
+                    <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
+                    <span class="text-xs" >6min</span>
+                </div>
+        
+                <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
+        
+                <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
+        
+                <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
+                    <span class="text-xs">13 Aug 2026</span>
+                    <button class="flex  gap-1 p-1 rounded" >
+                        <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
+                        <span>23</span>
+                    </button>
+                </div>
+        
             </div>
-    
-            <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
-    
-            <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
-    
-            <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
-                <span class="text-xs">13 Aug 2026</span>
-                <button class="flex gap-1 p-1 rounded" >
-                    <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
-                    <span>23</span>
-                </button>
-            </div>
-    
-        </div>
-    </a>
+        </a>
+    </div>
 
 </div>
 

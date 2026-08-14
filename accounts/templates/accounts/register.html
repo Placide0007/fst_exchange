@@ -2,35 +2,10 @@
 
 {% load static %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'accounts/css/register.css' %}">
-{% endblock css %}
-
 {% block title %}
     register page
 {% endblock title %}
 
 {% block content %}
-  <div class="auth-big-container" >
-    <a class="to-home" href="{% url 'home' %}">to Home page</a>
-    <div class="form-container">
-        <form action="" method="post">
-            <p class="title" >Inscription</p>
-            <div>
-                <input type="text" placeholder="Pseudo" name="username">
-            </div>
-            <div>
-                <input type="password" name="password" placeholder="Mot de passe">
-            </div>
-            <div>
-                <input type="password" name="password" placeholder="Comfirmation">
-            </div>
-            <button>Se connecter</button>
-            <div class="alternativ-link">
-                <p>A deja un compte?</p>
-                <a href="{% url 'login' %}">Se Connecter</a>
-            </div>
-        </form>
-    </div>
-  </div>
+  <p>register page</p>
 {% endblock %}

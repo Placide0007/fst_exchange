@@ -1,27 +1,18 @@
-{% load static %}
-
-<!DOCTYPE html>
+{% load static tailwind_tags %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    {% block css %}{% endblock css %}
-    <title>{% block title %}{% endblock title %}</title>
-</head>
+  <head>
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% tailwind_css %}
+  </head>
 
-<body>
-    <main>
-        {% include 'includes/header.html' %}
-
-        <section class="content">
-            {% block content %}{% endblock content %}
-        </section>
-
-        {% include 'includes/footer.html' %}
-    </main>
-</body>
+  <body>
+    <section class="content">
+      {% block content %} {% endblock content %}
+    </section>
+  </body>
 </html>

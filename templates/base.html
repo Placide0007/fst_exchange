@@ -1,22 +1,38 @@
 {% load static tailwind_tags %}
+
 <!doctype html>
 <html lang="en">
   <head>
-    <title>{% block title %} {% endblock title %}</title>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    {% tailwind_css %}
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'vendor/waves/waves.min.css' %}" />
+
+    {% tailwind_css %} {% block css %}{% endblock css %}
   </head>
 
   <body>
-   <main class="flex flex-col min-h-screen" >
-        {% include 'includes/header.html' %}
-        <section class="content grow bg-slate-100">
-            {% block content %} {% endblock content %}
-        </section>
-        {% include 'includes/footer.html' %}
-   </main>
+    <main class="flex min-h-screen flex-col">
+      {% include 'includes/header.html' %}
+
+      <section class="content grow bg-slate-100">
+        {% block content %} {% endblock content %}
+      </section>
+
+      {% include 'includes/footer.html' %}
+    </main>
+
+    <script src="{% static 'vendor/waves/waves.min.js' %}"></script>
+
+    <script src="{% static 'vendor/js/config.js' %}"></script>
+
+    {% block js %} {% endblock js %}
   </body>
 </html>

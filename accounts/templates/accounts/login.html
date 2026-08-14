@@ -12,19 +12,19 @@
     <a class=" top-10 left-10 absolute border border-slate-500 p-1"  href="{% url 'home' %}">Home page</a>
 
     <div class="flex justify-center items-center h-screen bg-slate-100" >
-        <form class="flex shadow-xs flex-col bg-white p-4 gap-3" action="" method="post">
-            <p class="text-center mb-3" >Connexion</p>
+        <form class="flex shadow-xs flex-col  bg-white p-10 gap-3" action="" method="post">
+            <p class="text-center mb-3 font-semibold" >Connexion</p>
             <div>
-                <label for="">Pseudo</label>
-                <input class="mt-1 border border-slate-200 p-2 w-full" type="text" placeholder="Ex:Placide" name="username" id="">
+                <label  for="">Pseudo</label>
+                <input class="mt-1 border border-slate-200 p-4 w-full" type="text" placeholder="Ex:Placide" name="username">
             </div>
             <div>
                 <label for="">Mot de passe</label>
-                <input class="mt-1  border border-slate-200 p-2 w-full" type="password" placeholder="*********" name="password2">
+                <input class="mt-1  border border-slate-200 p-4 w-full" type="password" placeholder="*********" name="password2">
             </div>
-            <button class="bg-slate-900 text-white p-3" >Se connecter</button>
+            <button class="bg-slate-900 cursor-pointer text-white p-3" >Se connecter</button>
             <div>
-                <a class="text-xs underline" href="{% url 'register' %}">Creer un compte</a>
+                <a class="text-xs underline cursor-pointer" href="{% url 'register' %}">Creer un compte</a>
             </div>
         </form>
     </div>

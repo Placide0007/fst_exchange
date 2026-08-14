@@ -1,9 +1,13 @@
-<header class="flex justify-between items-center px-25 py-2 border-slate-300 border">
+<header class="flex justify-between  sticky top-0 bg-white items-center px-25 py-2 border-slate-300 border">
     <p class="font-bold text-xl" >LOGO</p>
-    <nav class="flex gap-10" >
+    <nav class="flex gap-8" >
         <a href="{% url 'home' %}">Accueil</a>
         <a href="{% url 'about' %}">A propos</a>
+        <a href="{% url 'blog' %}">Blog</a>
         <a href="{% url 'profile' %}">Profile</a>
     </nav>
-    <a class="text-xs border-slate-100 p-2 border" href="{% url 'login' %}">Se Connecter</a>
+    <a class="text-xs bg-slate-200 transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'login' %
+    ">
+        Se Connecter
+    </a>
 </header>

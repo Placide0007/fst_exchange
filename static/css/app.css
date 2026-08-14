@@ -3,17 +3,30 @@
     src: url("../fonts/poppins/Poppins-Regular.ttf") format("truetype");
 }
 
-@font-face {
-    font-family: "Raleway";
-    src: url("../fonts/raleway/Raleway-Regular.ttf") ;
-    font-weight: 400;
-}
 
 body {
     font-family: "Poppins", sans-serif;
     font-size: 14px;
 }
 
-span {
-    font-family: Raleway , sans-serif !important;
+input {
+    border-radius: 0;
+}
+
+
+::-webkit-scrollbar {
+    width: 7px; 
+}
+
+::-webkit-scrollbar-track {
+    background: gray;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightslategray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

@@ -8,8 +8,29 @@
 
 {% block content %}
 
-<div>
-    <p>profile page</p>
+<div id="profile" class="grid grid-cols-2 px-20 py-10 bg-white">
+    <div class="flex  flex-col gap-3 justify-start" >
+        <button class="border-2 border-dotted border-slate-200 p-3 flex justify-center items-center rounded-full font-bold  h-[210px] w-[200px]" >
+            <img class="w-full  h-auto" src="{% static 'images/user.svg' %}" alt="">
+        </button>
+        <button class="text-xs text-start px-18" >Rasoa436</button>
+    </div>
+
+    <div class="flex justify-end items-start" >
+        <button class="border bg-slate-800 p-3 cursor-pointer text-white  text-xs" >Creer un poste</button>
+    </div>
+</div>
+
+<div id="publication_list" class="py-5 px-15">
+
+    <div class="my-4" >
+        <button class=" text-xl underline-offset-4 underline p-1 rounded " >Publication & Actualites</button>
+    </div>
+    
+    <div class="p-5" >
+        <p class="text-slate-700" >Aucun annonce</p>
+    </div>
+
 </div>
 
 {% endblock content %}

@@ -16,7 +16,9 @@
             <img class="w-full  h-auto" src="{% static 'images/user.svg' %}" alt="">
         </button>
 
-        <button class="text-xs text-start px-18" >Rasoa436</button>
+        <button class="text-start px-18" >
+            {{ request.user.username|capfirst }}
+        </button>
 
     </div>
 

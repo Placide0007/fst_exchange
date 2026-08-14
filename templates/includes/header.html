@@ -10,11 +10,25 @@
         <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'blog' %} bg-slate-100 {% endif %} " href="{% url 'blog' %}">
             Blog
         </a>
-        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'profile' %} bg-slate-100 {% endif %} " href="{% url 'profile' %}">
-            Profile
-        </a>
+        
+        {% if user.is_authenticated %}
+            <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'profile' %} bg-slate-100 {% endif %} " href="{% url 'profile' %}">
+                Profile
+            </a>
+        {% endif %}
     </nav>
-    <a class="bg-slate-200 text-xs transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'login' %}">
-        Se Connecter
-    </a>
+        {% if user.is_authenticated %}
+            <div class="flex justify-center gap-3 items-center" >
+                <button class="text-start text-xl rounded-full border  border-slate-400 flex justify-center items-center h-[45px] w-[45px]" >
+                    {{ request.user.username|slice:":2"|upper }}
+                </button>
+                <a class="bg-slate-200 text-xs transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'logout' %}">
+                    Se deconnecter
+                </a>
+            </div>
+        {% else %}
+            <a class="bg-slate-200 text-xs transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'login' %}">
+                Se Connecter
+            </a>      
+        {% endif %}  
 </header>

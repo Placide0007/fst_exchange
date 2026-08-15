@@ -3,88 +3,143 @@
 {% load static %}
 
 {% block title %}
-    blog
+    Publications
 {% endblock title %}
 
 {% block content %}
 
-<div id="postModal" class="hidden fixed inset-0 z-50 bg-black/50 justify-center items-center">
+    <div id="postModal" class="hidden fixed inset-0 z-50 bg-black/50 justify-center items-center">
 
-    <div class="bg-white p-6 w-full max-w-md">
+        <div class="bg-white p-6 w-full max-w-md">
 
-        <button id="closePostModal" class="float-right text-xl cursor-pointer">×</button>
+            <button id="closePostModal" class="float-right text-xl cursor-pointer">×</button>
 
-        <h2 class="font-bold text-xl mb-5">Créer un post</h2>
+            <h2 class="font-bold text-xl mb-5">Partager une publication</h2>
 
-        <form action="{% url 'blog' %}" method="POST" class="flex flex-col gap-3">
-            {% csrf_token %}
+            <form action="{% url 'blog' %}" method="POST" class="flex flex-col gap-3">
+                
+                {% csrf_token %}
 
-            <input type="text" name="title" placeholder="Titre" required
-                   class="border border-slate-300 p-2 w-full">
+                <input type="text" name="title" placeholder="Titre de la publication" required class="border border-slate-300 p-2 w-full">
 
-            <textarea name="content" placeholder="Contenu" required
-                      class="border border-slate-300 p-2 w-full h-32"></textarea>
+                <textarea name="content" placeholder="Partagez une information, une idée ou une actualité..." required class="border border-slate-300 p-2 w-full h-32"></textarea>
 
-            <button type="submit" class="bg-slate-800 text-white p-2 cursor-pointer">
-                Publier
+                <select name="category" required class="border border-slate-300 p-2 w-full">
+
+                    <option value="">
+                        Choisir une catégorie
+                    </option>
+
+                    {% for category in categories %}
+
+                        <option value="{{ category.id }}">
+                            {{ category.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit" class="bg-slate-800 text-white p-2 cursor-pointer">
+                    Publier
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div id="blog" class="grid border-b bg-gray-50 border-slate-300 grid-cols-2">
+
+        <div class="flex py-10 px-25 flex-col gap-3">
+
+            <div>
+
+                <button class="text-xs border border-slate-200 p-1 rounded">
+                    Communauté académique
+                </button>
+
+            </div>
+
+            <p class="font-extrabold text-5xl whitespace-nowrap">
+                Publications & Actualités
+            </p>
+
+            <p class="text-sm leading-6">
+                Découvrez les publications de la communauté de la Faculté des Sciences et partagez vos informations, projets, idées et actualités avec les autres étudiants.
+            </p>
+
+            <form action="{% url 'blog' %}" method="GET" class="flex gap-5 justify-center items-center py-4">
+
+                <input class="mt-1 border bg-white border-slate-500 p-2 w-full" type="text" placeholder="Rechercher une publication..." name="search" value="{{ request.GET.search }}">
+
+                {% if request.GET.category %}
+
+                    <input type="hidden" name="category" value="{{ request.GET.category }}">
+
+                {% endif %}
+
+                <button type="submit" class="bg-slate-800 text-xs text-white p-2 cursor-pointer">
+                    Rechercher
+                </button>
+
+            </form>
+
+            <div class="flex gap-2 items-center">
+
+                <a href="{% url 'blog' %}" class="text-xs cursor-pointer p-2 rounded {% if not request.GET.category %}bg-slate-800 text-white{% else %}border border-slate-300{% endif %}">
+                    Toutes
+                </a>
+
+                {% for category in categories %}
+
+                    <a href="?category={{ category.id }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="text-xs cursor-pointer p-2 rounded {% if request.GET.category == category.id|stringformat:'s' %}bg-slate-800 text-white{% else %}border border-slate-300{% endif %}">
+                        {{ category.name }}
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="flex justify-end items-start py-10 px-25">
+
+            <button id="openPostModal" class="border bg-slate-800 p-3 cursor-pointer text-white text-xs">
+                Nouvelle publication
             </button>
-        </form>
 
-    </div>
-
-</div>
-
-<div id="blog" class="grid border-b bg-gray-50 border-slate-300  grid-cols-2" >
-
-    <div  class="flex py-10 px-25 flex-col gap-3" >
-
-        <div>
-            <button class="text-xs border border-slate-200 p-1 rounded" >Actualite & publication</button>
-        </div>
-
-        <p class="font-extrabold text-5xl" >Blog et Publication</p>
-
-        <p class="leading-5 text-xs" >Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-        <div class="flex gap-5 justify-center items-center py-4 " >
-            <input class="mt-1 border bg-white border-slate-500 p-2 w-full" type="text" placeholder="Ex:python" name="">
-            <button class="bg-slate-800 text-xs text-white p-2 cursor-pointer" >Recherche</button>
-        </div>
-
-        <div class="flex gap-2 items-center" >
-            <button class="text-xs cursor-pointer bg-slate-800 text-white p-2 rounded" >Tous</button>
-            <button class="text-xs cursor-pointer border border-slate-300  p-2 rounded" >Tech</button>
-            <button class="text-xs cursor-pointer border border-slate-300  p-2 rounded" >Innovation</button>
         </div>
 
     </div>
 
 
-    <div class="flex justify-end items-start py-10 px-25" >
-        <button id="openPostModal" class="border bg-slate-800 p-3 cursor-pointer text-white text-xs">Creer un poste</button>
-    </div>
-    
-</div>
+    <div id="blog" class="py-5 px-25">
 
-<div id="blog" class="py-5 px-25">
+        <div class="my-4">
 
-    <div class="my-4" >
-        <button class=" text-xl underline-offset-4 underline p-1 rounded " >Publication & Actualites</button>
-    </div>
+            <button class="text-xl underline-offset-4 underline p-1 rounded">
+                Dernières publications
+            </button>
 
-    <div class="grid grid-cols-3 gap-5" >
+        </div>
 
-    {% for post in posts %}
+        <div class="grid grid-cols-3 gap-5">
 
-                <a href="{% url 'show' post.id %}" class="block">
+            {% for post in posts %}
 
-                    <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white">
+                <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white">
+
+                    <a href="{% url 'show' post.id %}" class="flex flex-col gap-3">
 
                         <div class="flex justify-between items-center py-2">
 
-                            <button class="text-xs bg-gray-300 p-1 text-gray-900">
-                                Innovation
-                            </button>
+                            <span class="text-xs bg-gray-300 p-1 text-gray-900">
+                                {{ post.category.name }}
+                            </span>
 
                             <span class="text-xs">
                                 {{ post.created_at|date:"d M Y" }}
@@ -100,53 +155,78 @@
                             {{ post.content|truncatechars:150 }}
                         </p>
 
-                        <div class="flex justify-between items-center border-t border-slate-100 pt-2 mt-auto">
+                    </a>
 
-                            <span class="text-xs  p-1 border border-slate-200 bg-slate-50">
-                                {{ post.user.username }}
-                            </span>
+                    <div class="flex justify-between items-center border-t border-slate-100 pt-2 mt-auto">
 
-                            <div class="flex justify-center gap-2 items-center">
+                        <span class="text-xs p-1 border border-slate-200 bg-slate-50">
+                            {{ post.user.username }}
+                        </span>
 
-                                <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
-                                    {% csrf_token %}
+                        <div class="flex justify-center gap-2 items-center">
 
-                                    <button type="submit" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
+                            <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
 
-                                        {% if request.user in post.reactions.all %}
-                                            <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4 icon-liked">
-                                        {% else %}
-                                            <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 icon-liked">
-                                        {% endif %}
+                                {% csrf_token %}
 
-                                        <span class="text-xs reaction-count">
-                                            {{ post.reactions.count }}
-                                        </span>
+                                <button type="submit" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
 
-                                    </button>
+                                    {% if request.user in post.reactions.all %}
 
-                                </form>
+                                        <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4 icon-liked">
 
-                                <button class="flex gap-1 justify-center items-center p-2 rounded">
-                                    <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
-                                    <span class="text-xs">3</span>
+                                    {% else %}
+
+                                        <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 icon-liked">
+
+                                    {% endif %}
+
+                                    <span class="text-xs reaction-count">
+                                        {{ post.reactions.count }}
+                                    </span>
+
                                 </button>
 
-                            </div>
+                            </form>
+
+                            <a href="{% url 'show' post.id %}">
+
+                                <button type="button" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
+
+                                    <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
+
+                                    <span class="text-xs">
+                                        {{ post.comments.count }}
+                                    </span>
+
+                                </button>
+
+                            </a>
 
                         </div>
 
                     </div>
 
-                </a>
+                </div>
 
-    {% endfor %}
-    
+            {% empty %}
+
+                <div class="col-span-3 flex justify-center items-center py-15">
+
+                    <p class="text-sm text-slate-500">
+                        Aucune publication pour le moment.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
-    
-</div>
 
-<script defer src="{% static 'core/js/blog.js' %}"></script>
-<script defer src="{% static 'core/js/reaction.js' %}"></script>
+
+    <script defer src="{% static 'core/js/blog.js' %}"></script>
+    <script defer src="{% static 'core/js/reaction.js' %}"></script>
 
 {% endblock content %}

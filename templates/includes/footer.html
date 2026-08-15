@@ -1,32 +1,79 @@
-<footer class="px-25   bg-slate-950 text-white  border border-slate-100" >
-    
-    <div class="grid py-5 grid-cols-3" >
-        <div class="flex flex-col gap-2 py-3" >
-            <p class="underline py-3">FST</p>
-            <p class="max-w-80 text-slate-400 text-xs" >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, repudiandae
+<footer class="px-25 bg-slate-950 text-white border border-slate-100">
+
+    <div class="grid py-5 grid-cols-3">
+
+        <div class="flex flex-col gap-2 py-3">
+
+            <p class="underline py-3">
+                FST 
             </p>
+
+            <p class="max-w-80 text-slate-400 text-xs">
+                Une plateforme collaborative dédiée aux étudiants de la Faculté des Sciences de l'Université de Toamasina pour partager, échanger et contribuer à la vie académique.
+            </p>
+
         </div>
 
-        <div class="flex flex-col gap-2 py-3" >
-            <p class="underline py-3"  >Navigation</p>
-            <a class="text-slate-400 text-xs" href="{% url 'home' %}">Accueil</a>
-            <a class="text-slate-400 text-xs" href="{% url 'about' %}">A propos du blog</a>
-            <a class="text-slate-400 text-xs" href="{% url 'blog' %}">blog et publications</a>
+        <div class="flex flex-col gap-2 py-3">
+
+            <p class="underline py-3">
+                Navigation
+            </p>
+
+            <a class="text-slate-400 text-xs" href="{% url 'home' %}">
+                Accueil
+            </a>
+
+            <a class="text-slate-400 text-xs" href="{% url 'about' %}">
+                À propos
+            </a>
+
+            <a class="text-slate-400 text-xs" href="{% url 'blog' %}">
+                Communauté
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <a class="text-slate-400 text-xs" href="{% url 'profile' %}">
+                    Mon profil
+                </a>
+
+            {% endif %}
+
         </div>
 
-        <div class="flex flex-col gap-2 py-3" >
-            <p class="underline py-3" >Contact & Campus</p>
-            <a class="text-slate-400 text-xs" href="">Lorem ipsum dolor sit amet.</a>
-            <a class="text-slate-400 text-xs" href="">lazareplacide02@gmail.com</a>
-            <p class="text-slate-400 text-xs">+261341104461</p>
+        <div class="flex flex-col gap-2 py-3">
+
+            <p class="underline py-3">
+                Faculté des Sciences
+            </p>
+
+            <p class="text-slate-400 text-xs">
+                Université de Toamasina
+            </p>
+
+            <p class="text-slate-400 text-xs">
+                Toamasina, Madagascar
+            </p>
+
+            <p class="text-slate-400 text-xs">
+                Espace académique et communautaire
+            </p>
+
         </div>
 
     </div>
 
-    <div class="flex text-slate-400  justify-between py-4 text-xs border-slate-700 border-t" >
-        <p  >&copy; 2026 Lazare placide Andriatahina blog_fst</p>
-        <p>FST</p>
+    <div class="flex text-slate-400 justify-between py-4 text-xs border-slate-700 border-t">
+
+        <p>
+            &copy; 2026 FST  — Faculté des Sciences, Université de Toamasina
+        </p>
+
+        <p>
+            FST 
+        </p>
+
     </div>
-    
+
 </footer>

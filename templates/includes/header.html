@@ -1,46 +1,53 @@
-<header class="flex justify-between  z-4 sticky top-0 bg-white items-center px-25 py-2 border-slate-300 border">
+<header class="flex justify-between z-4 sticky top-0 bg-white items-center px-25 py-2 border-slate-300 border">
 
-    <p class="font-bold text-xl" >LOGO</p>
+    <a class="font-bold text-xl" href="{% url 'home' %}">
+        FST 
+    </a>
 
-    <nav class="flex gap-5" >
+    <nav class="flex gap-5">
 
-        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'home' %} bg-slate-100  {% endif %}" href="{% url 'home' %}">
+        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'home' %}bg-slate-100{% endif %}" href="{% url 'home' %}">
             Accueil
         </a>
 
-        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'about' %} bg-slate-100 {% endif %} " href="{% url 'about' %}">
-            A propos
+        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'about' %}bg-slate-100{% endif %}" href="{% url 'about' %}">
+            À propos
         </a>
 
-        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'blog' %} bg-slate-100 {% endif %} " href="{% url 'blog' %}">
-            Blog
+        <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'blog' %}bg-slate-100{% endif %}" href="{% url 'blog' %}">
+            Communauté
         </a>
-        
+
         {% if user.is_authenticated %}
-            <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'profile' %} bg-slate-100 {% endif %} " href="{% url 'profile' %}">
-                Profile
+
+            <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'profile' %}bg-slate-100{% endif %}" href="{% url 'profile' %}">
+                Mon profil
             </a>
+
         {% endif %}
 
     </nav>
 
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 
-            <div class="flex justify-center gap-3 items-center" >
-                <button class="text-start text-xl rounded-full border  border-slate-400 flex justify-center items-center h-[45px] w-[45px]" >
-                    {{ request.user.username|slice:":2"|upper }}
-                </button>
-                <a class="bg-slate-200 text-sm transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'logout' %}">
-                    Se Deconnecter
-                </a>
-            </div>
+        <div class="flex justify-center gap-3 items-center">
 
-        {% else %}
+            <button class="text-start text-xl rounded-full border border-slate-400 flex justify-center items-center h-[45px] w-[45px]">
+                {{ request.user.username|slice:":2"|upper }}
+            </button>
 
-            <a class="bg-slate-200 text-sm transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'login' %}">
-                Se Connecter
+            <a class="bg-slate-200 text-sm transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'logout' %}">
+                Se déconnecter
             </a>
 
-        {% endif %}
+        </div>
+
+    {% else %}
+
+        <a class="hover:bg-slate-200 text-sm transition duration-200 shadow bg-slate-600 hover:text-black text-white p-3" href="{% url 'login' %}">
+            Se connecter
+        </a>
+
+    {% endif %}
 
 </header>

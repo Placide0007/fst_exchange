@@ -16,16 +16,16 @@
 
         <div>
             <button class="text-xs border border-slate-200 p-1 rounded">
-                FST Universite de Toamasina
+                FST Université de Toamasina
             </button>
         </div>
 
         <p class="font-extrabold text-[55px] leading-18">
-            Lorem ipsum dolor sit amet consectetur.
+            La communauté scientifique de la Faculté des Sciences
         </p>
 
-        <p class="text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        <p class="text-xs leading-5">
+            Un espace collaboratif dédié aux étudiants pour partager leurs connaissances, découvrir les actualités de la faculté et échanger autour de leurs parcours scientifiques.
         </p>
 
         <div class="flex gap-10">
@@ -35,16 +35,19 @@
             </a>
 
             <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border" href="{% url 'blog' %}">
-                Explorer le blog
+                Découvrir la communauté
             </a>
+
         </div>
 
     </div>
 
     <div class="flex justify-center items-center" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-out-back" data-aos-once="true">
+
         <div class="w-full max-w-md md:w-1/2">
-            <img class="w-full h-auto" src="{% static 'images/laptop.svg' %}" alt="Laptop">
+            <img class="w-full h-auto" src="{% static 'images/laptop.svg' %}" alt="Plateforme FST">
         </div>
+
     </div>
 
 </div>
@@ -55,9 +58,11 @@
 <div id="jumbotron" class="py-5 px-25">
 
     <div class="my-4">
+
         <button class="text-xl underline-offset-4 underline p-1 rounded">
-            Publications & Actualites
+            Actualités & Publications
         </button>
+
     </div>
 
     <div class="grid grid-cols-3 gap-5">
@@ -70,9 +75,9 @@
 
                     <div class="flex justify-between items-center py-2">
 
-                        <button class="text-xs bg-gray-300 p-1 text-gray-900">
-                            Innovation
-                        </button>
+                        <span class="text-xs bg-gray-300 p-1 text-gray-900">
+                            {{ post.category.name }}
+                        </span>
 
                         <span class="text-xs">
                             {{ post.created_at|date:"H:i" }}
@@ -94,31 +99,27 @@
                             {{ post.created_at|date:"d M Y" }}
                         </span>
 
-                        <div class="flex justify-center gap-2 items-center">
+                        <div class="flex gap-3 items-center">
 
-                            <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
-                                {% csrf_token %}
+                            <div class="flex gap-1.5 items-center px-2 py-1 rounded bg-slate-50 text-slate-400 pointer-events-none">
 
-                                <button type="submit" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
+                                <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 opacity-60">
 
-                                    {% if request.user in post.reactions.all %}
-                                        <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4 icon-liked">
-                                    {% else %}
-                                        <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 icon-liked">
-                                    {% endif %}
+                                <span class="text-xs">
+                                    {{ post.reactions.count }}
+                                </span>
 
-                                    <span class="text-xs reaction-count">
-                                        {{ post.reactions.count }}
-                                    </span>
+                            </div>
 
-                                </button>
+                            <div class="flex gap-1.5 items-center px-2 py-1 rounded bg-slate-50 text-slate-400 pointer-events-none">
 
-                            </form>
+                                <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4 opacity-60">
 
-                            <button class="flex gap-1 justify-center items-center p-2 rounded">
-                                <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
-                                <span class="text-xs">3</span>
-                            </button>
+                                <span class="text-xs">
+                                    {{ post.comments.count }}
+                                </span>
+
+                            </div>
 
                         </div>
 
@@ -128,32 +129,50 @@
 
             </a>
 
+        {% empty %}
+
+            <div class="col-span-3 flex justify-center items-center py-1">
+
+                <p class="text-sm text-slate-500">
+                    Aucune publication pour le moment.
+                </p>
+
+            </div>
+
         {% endfor %}
 
     </div>
 
+
     {% comment %} Pagination {% endcomment %}
 
-    <div class="flex justify-center items-center gap-3 mt-8">
+    {% if posts.paginator.num_pages > 1 %}
 
-        {% if posts.has_previous %}
-            <a href="?page={{ posts.previous_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
-                Précédent
-            </a>
-        {% endif %}
+        <div class="flex justify-center items-center gap-3 mt-8">
 
+            {% if posts.has_previous %}
 
-        <span class="text-sm">
-            Page {{ posts.number }} sur {{ posts.paginator.num_pages }}
-        </span>
+                <a href="?page={{ posts.previous_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
+                    Précédent
+                </a>
 
-        {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}" class="border border-slate-300 px-4 py-1 rounded hover:bg-slate-100">
-                Suivant
-            </a>
-        {% endif %}
+            {% endif %}
 
-    </div>
+            <span class="text-sm">
+                Page {{ posts.number }} sur {{ posts.paginator.num_pages }}
+            </span>
+
+            {% if posts.has_next %}
+
+                <a href="?page={{ posts.next_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
+                    Suivant
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
 
 </div>
 

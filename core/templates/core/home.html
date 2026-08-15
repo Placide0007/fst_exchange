@@ -8,27 +8,35 @@
 
 {% block content %}
 
-{% comment %} hero section  {% endcomment %}
+{% comment %} hero section {% endcomment %}
 
-<div id="hero" class="grid px-25 border-b z-0 bg-white border-slate-300  grid-cols-2" >
+<div id="hero" class="grid px-25 border-b z-0 bg-white border-slate-300 grid-cols-2">
 
-    <div  class="flex py-15 flex-col gap-3" >
+    <div class="flex py-15 flex-col gap-3">
 
         <div>
-            <button class="text-xs border border-slate-200 p-1 rounded" >FST Universite de Toamasina</button>
+            <button class="text-xs border border-slate-200 p-1 rounded">
+                FST Universite de Toamasina
+            </button>
         </div>
 
-        <p class="font-extrabold text-5xl leading-15" >Lorem ipsum dolor sit amet consectetur.</p>
+        <p class="font-extrabold text-[55px] leading-18">
+            Lorem ipsum dolor sit amet consectetur.
+        </p>
 
-        <p class="text-xs" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus illum ipsa animi dolor, dolore dicta pariatur quibusdam laborum, voluptatem itaque molestiae explicabo dolores sit suscipit nulla expedita eum maiores?</p>
+        <p class="text-xs">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </p>
 
-        <div class="flex gap-10" > 
-            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border" href="{% url 'login' %}"> 
-                Se Connecter 
-            </a> 
-            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border" href="{% url 'blog' %}"> 
-                Explorer le blog 
-            </a> 
+        <div class="flex gap-10">
+
+            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border" href="{% url 'login' %}">
+                Se Connecter
+            </a>
+
+            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border" href="{% url 'blog' %}">
+                Explorer le blog
+            </a>
         </div>
 
     </div>
@@ -41,54 +49,79 @@
 
 </div>
 
-{% comment %} blog section  {% endcomment %}
+
+{% comment %} blog section {% endcomment %}
 
 <div id="jumbotron" class="py-5 px-25">
 
-    <div class="my-4" >
-        <button class=" text-xl underline-offset-4 underline p-1 rounded " >Publications & Actualites</button>
+    <div class="my-4">
+        <button class="text-xl underline-offset-4 underline p-1 rounded">
+            Publications & Actualites
+        </button>
     </div>
 
-    <div class="grid grid-cols-3 gap-5" >
+    <div class="grid grid-cols-3 gap-5">
 
         {% for post in posts %}
 
-            <a href="">
+            <a href="{% url 'show' post.id %}" class="block">
 
-                <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+                <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white">
 
-                    <div class="flex justify-between items-center py-2" >
-                        <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
-                        <span class="text-xs" >{{ post.created_at|date:"H:i" }}</span>
+                    <div class="flex justify-between items-center py-2">
+
+                        <button class="text-xs bg-gray-300 p-1 text-gray-900">
+                            Innovation
+                        </button>
+
+                        <span class="text-xs">
+                            {{ post.created_at|date:"H:i" }}
+                        </span>
+
                     </div>
 
-                    <p class="font-semibold" >{{ post.title }}</p>
+                    <p class="font-semibold">
+                        {{ post.title|truncatechars:50 }}
+                    </p>
 
-                    <p class="text-xs leading-5" >{{ post.content }}</p>
+                    <p class="text-xs leading-5">
+                        {{ post.content|truncatechars:150 }}
+                    </p>
 
-                    <div class="flex justify-between items-center border-t border-slate-100 pt-2" >
-                        <span class="text-xs">{{ post.created_at|date:"d M Y" }}</span>
+                    <div class="flex justify-between items-center border-t border-slate-100 pt-2 mt-auto">
 
-                        <div class="flex justify-center gap-2 items-center" >
+                        <span class="text-xs">
+                            {{ post.created_at|date:"d M Y" }}
+                        </span>
+
+                        <div class="flex justify-center gap-2 items-center">
 
                             <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
                                 {% csrf_token %}
+
                                 <button type="submit" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
+
                                     {% if request.user in post.reactions.all %}
                                         <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4 icon-liked">
                                     {% else %}
                                         <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 icon-liked">
                                     {% endif %}
-                                    <span class="text-xs reaction-count">{{ post.reactions.count }}</span>
+
+                                    <span class="text-xs reaction-count">
+                                        {{ post.reactions.count }}
+                                    </span>
+
                                 </button>
+
                             </form>
 
-                            <button class="flex gap-1 justify-center items-center p-2 rounded" >
+                            <button class="flex gap-1 justify-center items-center p-2 rounded">
                                 <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
                                 <span class="text-xs">3</span>
                             </button>
 
                         </div>
+
                     </div>
 
                 </div>
@@ -96,6 +129,29 @@
             </a>
 
         {% endfor %}
+
+    </div>
+
+    {% comment %} Pagination {% endcomment %}
+
+    <div class="flex justify-center items-center gap-3 mt-8">
+
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
+                Précédent
+            </a>
+        {% endif %}
+
+
+        <span class="text-sm">
+            Page {{ posts.number }} sur {{ posts.paginator.num_pages }}
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}" class="border border-slate-300 px-4 py-1 rounded hover:bg-slate-100">
+                Suivant
+            </a>
+        {% endif %}
 
     </div>
 

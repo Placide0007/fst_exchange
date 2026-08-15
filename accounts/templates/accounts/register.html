@@ -20,24 +20,24 @@
             <p class="text-center mb-3 font-semibold" >Inscription</p>
 
             <div>
-                <label for="">Pseudo</label>
+                <label class="text-sm" for="">Pseudo</label>
                 <input class="mt-1 border border-slate-200 p-4 w-full" type="text" placeholder="Ex:Placide" name="username" value="{{ request.POST.username }}">
                 <p class="text-xs text-red-500 " >{{ form.username.errors.0 }}</p>
             </div>
 
             <div>
-                <label for="">Mot de passe</label>
+                <label class="text-sm" for="">Mot de passe</label>
                 <input class="mt-1 border border-slate-200 p-4 w-full" type="password" placeholder="*********" name="password1">
                 <p class="text-xs text-red-500" >{{ form.password1.errors.0 }}</p>
             </div>
 
             <div>
-                <label for="">Confirmation</label>
+                <label class="text-sm" for="">Confirmation</label>
                 <input class="mt-1 border border-slate-200 p-4 w-full" type="password" placeholder="*********" name="password2">
                 <p class="text-xs text-red-500" >{{ form.password2.errors.0 }}</p>
             </div>
 
-            <button class="bg-slate-900 cursor-pointer text-white p-3" >Se connecter</button>
+            <button class="bg-slate-900 text-sm cursor-pointer text-white p-4" >Se connecter</button>
 
             <div>
                 <a class="text-xs underline" href="{% url 'login' %}">Connexion</a>

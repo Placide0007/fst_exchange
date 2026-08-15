@@ -25,6 +25,13 @@ def blog(request):
 
 
 @login_required
+def show(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    return render(request, 'core/blog/blog_show.html', {'post': post})
+
+
+@login_required
 def react_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
@@ -43,7 +50,6 @@ def react_post(request, post_id):
         )
         liked = True
 
-    # Si la requête vient de notre JS (fetch), on répond en JSON
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({
             'liked': liked,
@@ -52,5 +58,4 @@ def react_post(request, post_id):
             'unliked_icon_url': static('icons/like.svg'),
         })
 
-    # Sinon (pas de JS), comportement classique : redirect + rechargement
     return redirect("blog")

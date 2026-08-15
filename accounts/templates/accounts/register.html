@@ -1,46 +1,82 @@
+
 {% extends 'base_auth.html' %}
 
 {% load static %}
 
 {% block title %}
-    login page
+    register page
 {% endblock title %}
 
 {% block content %}
-<div class="relative" >
 
-    <a class=" top-10 left-10 absolute border border-slate-500 p-1"  href="{% url 'home' %}">Home page</a>
+<div class="relative min-h-screen">
 
-    <div class="flex justify-center items-center h-screen bg-slate-100" >
+    <a class="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-10 md:left-10 border border-slate-500 px-2 py-1 text-xs sm:text-sm" href="{% url 'home' %}">
+        Home page
+    </a>
 
-        <form class="flex shadow-xs flex-col bg-white p-10  gap-3" action="" method="post">
+    <div class="flex justify-center items-center min-h-screen bg-slate-100 px-4 py-20 sm:px-6">
+
+        <form class="flex shadow-xs flex-col bg-white p-5 sm:p-8 md:p-10 gap-3 w-full max-w-md" action="" method="post">
 
             {% csrf_token %}
 
-            <p class="text-center mb-3 font-semibold" >Inscription</p>
+            <p class="text-center mb-3 font-semibold">
+                Inscription
+            </p>
 
             <div>
-                <label class="text-sm" for="">Pseudo</label>
-                <input class="mt-1 border border-slate-200 p-4 w-full" type="text" placeholder="Ex:Placide" name="username" value="{{ request.POST.username }}">
-                <p class="text-xs text-red-500 " >{{ form.username.errors.0 }}</p>
+
+                <label class="text-sm" for="username">
+                    Pseudo
+                </label>
+
+                <input id="username" class="mt-1 border border-slate-200 p-3 sm:p-4 w-full outline-none focus:border-slate-500" type="text" placeholder="Ex: Placide" name="username" value="{{ request.POST.username }}">
+
+                <p class="text-xs text-red-500">
+                    {{ form.username.errors.0 }}
+                </p>
+
             </div>
 
             <div>
-                <label class="text-sm" for="">Mot de passe</label>
-                <input class="mt-1 border border-slate-200 p-4 w-full" type="password" placeholder="*********" name="password1">
-                <p class="text-xs text-red-500" >{{ form.password1.errors.0 }}</p>
+
+                <label class="text-sm" for="password1">
+                    Mot de passe
+                </label>
+
+                <input id="password1" class="mt-1 border border-slate-200 p-3 sm:p-4 w-full outline-none focus:border-slate-500" type="password" placeholder="*********" name="password1">
+
+                <p class="text-xs text-red-500">
+                    {{ form.password1.errors.0 }}
+                </p>
+
             </div>
 
             <div>
-                <label class="text-sm" for="">Confirmation</label>
-                <input class="mt-1 border border-slate-200 p-4 w-full" type="password" placeholder="*********" name="password2">
-                <p class="text-xs text-red-500" >{{ form.password2.errors.0 }}</p>
+
+                <label class="text-sm" for="password2">
+                    Confirmation
+                </label>
+
+                <input id="password2" class="mt-1 border border-slate-200 p-3 sm:p-4 w-full outline-none focus:border-slate-500" type="password" placeholder="*********" name="password2">
+
+                <p class="text-xs text-red-500">
+                    {{ form.password2.errors.0 }}
+                </p>
+
             </div>
 
-            <button class="bg-slate-900 text-sm cursor-pointer text-white p-4" >Se connecter</button>
+            <button type="submit" class="bg-slate-900 text-sm cursor-pointer text-white p-3 sm:p-4">
+                S'inscrire
+            </button>
 
             <div>
-                <a class="text-xs underline" href="{% url 'login' %}">Connexion</a>
+
+                <a class="text-xs underline" href="{% url 'login' %}">
+                    Connexion
+                </a>
+
             </div>
 
         </form>
@@ -48,4 +84,6 @@
     </div>
 
 </div>
+
 {% endblock %}
+

@@ -1,3 +1,4 @@
+htm
 {% extends 'base.html' %}
 
 {% load static %}
@@ -8,16 +9,16 @@
 
 {% block content %}
 
-    <div id="postModal" class="hidden fixed inset-0 z-50 bg-black/50 justify-center items-center">
+    <div id="postModal" class="hidden fixed inset-0 z-50 bg-black/50 justify-center items-center p-4">
 
-        <div class="bg-white p-6 w-full max-w-md">
+        <div class="bg-white p-5 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
 
             <button id="closePostModal" class="float-right text-xl cursor-pointer">×</button>
 
             <h2 class="font-bold text-xl mb-5">Partager une publication</h2>
 
             <form action="{% url 'blog' %}" method="POST" class="flex flex-col gap-3">
-                
+
                 {% csrf_token %}
 
                 <input type="text" name="title" placeholder="Titre de la publication" required class="border border-slate-300 p-2 w-full">
@@ -51,9 +52,9 @@
     </div>
 
 
-    <div id="blog" class="grid border-b bg-gray-50 border-slate-300 grid-cols-2">
+    <div id="blog" class="grid border-b bg-gray-50 border-slate-300 grid-cols-1 lg:grid-cols-2">
 
-        <div class="flex py-10 px-25 flex-col gap-3">
+        <div class="flex py-8 sm:py-10 px-5 sm:px-8 md:px-12 lg:px-20 xl:px-25 flex-col gap-3">
 
             <div>
 
@@ -63,17 +64,17 @@
 
             </div>
 
-            <p class="font-extrabold text-5xl whitespace-nowrap">
+            <p class="font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight">
                 Publications & Actualités
             </p>
 
-            <p class="text-sm leading-6">
+            <p class="text-xs sm:text-sm leading-6">
                 Découvrez les publications de la communauté de la Faculté des Sciences et partagez vos informations, projets, idées et actualités avec les autres étudiants.
             </p>
 
-            <form action="{% url 'blog' %}" method="GET" class="flex gap-5 justify-center items-center py-4">
+            <form action="{% url 'blog' %}" method="GET" class="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center items-stretch py-4">
 
-                <input class="mt-1 border bg-white border-slate-500 p-2 w-full" type="text" placeholder="Rechercher une publication..." name="search" value="{{ request.GET.search }}">
+                <input class="mt-1 border bg-white border-slate-500 p-2 w-full min-w-0" type="text" placeholder="Rechercher une publication..." name="search" value="{{ request.GET.search }}">
 
                 {% if request.GET.category %}
 
@@ -81,13 +82,13 @@
 
                 {% endif %}
 
-                <button type="submit" class="bg-slate-800 text-xs text-white p-2 cursor-pointer">
+                <button type="submit" class="bg-slate-800 text-xs text-white p-2 cursor-pointer whitespace-nowrap">
                     Rechercher
                 </button>
 
             </form>
 
-            <div class="flex gap-2 items-center">
+            <div class="flex flex-wrap gap-2 items-center">
 
                 <a href="{% url 'blog' %}" class="text-xs cursor-pointer p-2 rounded {% if not request.GET.category %}bg-slate-800 text-white{% else %}border border-slate-300{% endif %}">
                     Toutes
@@ -106,9 +107,9 @@
         </div>
 
 
-        <div class="flex justify-end items-start py-10 px-25">
+        <div class="flex justify-start lg:justify-end items-start py-5 lg:py-10 px-5 sm:px-8 md:px-12 lg:px-20 xl:px-25">
 
-            <button id="openPostModal" class="border bg-slate-800 p-3 cursor-pointer text-white text-xs">
+            <button id="openPostModal" class="border bg-slate-800 p-3 cursor-pointer text-white text-xs w-full sm:w-auto">
                 Nouvelle publication
             </button>
 
@@ -117,31 +118,31 @@
     </div>
 
 
-    <div id="blog" class="py-5 px-25">
+    <div id="blog" class="py-5 px-5 sm:px-8 md:px-12 lg:px-20 xl:px-25">
 
         <div class="my-4">
 
-            <button class="text-xl underline-offset-4 underline p-1 rounded">
+            <button class="text-lg sm:text-xl underline-offset-4 underline p-1 rounded">
                 Dernières publications
             </button>
 
         </div>
 
-        <div class="grid grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
             {% for post in posts %}
 
-                <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white">
+                <div class="flex flex-col min-h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-4 sm:p-5 bg-white">
 
                     <a href="{% url 'show' post.id %}" class="flex flex-col gap-3">
 
-                        <div class="flex justify-between items-center py-2">
+                        <div class="flex justify-between items-center py-2 gap-2">
 
-                            <span class="text-xs bg-gray-300 p-1 text-gray-900">
+                            <span class="text-xs bg-gray-300 p-1 text-gray-900 truncate max-w-[60%]">
                                 {{ post.category.name }}
                             </span>
 
-                            <span class="text-xs">
+                            <span class="text-xs whitespace-nowrap">
                                 {{ post.created_at|date:"d M Y" }}
                             </span>
 
@@ -157,13 +158,13 @@
 
                     </a>
 
-                    <div class="flex justify-between items-center border-t border-slate-100 pt-2 mt-auto">
+                    <div class="flex justify-between items-center border-t border-slate-100 pt-2 mt-auto gap-2">
 
-                        <span class="text-xs p-1 border border-slate-200 bg-slate-50">
+                        <span class="text-xs p-1 border border-slate-200 bg-slate-50 truncate max-w-[45%]">
                             {{ post.user.username }}
                         </span>
 
-                        <div class="flex justify-center gap-2 items-center">
+                        <div class="flex justify-center gap-1 sm:gap-2 items-center">
 
                             <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
 
@@ -211,7 +212,7 @@
 
             {% empty %}
 
-                <div class="col-span-3 flex justify-center items-center py-15">
+                <div class="col-span-full flex justify-center items-center py-15">
 
                     <p class="text-sm text-slate-500">
                         Aucune publication pour le moment.

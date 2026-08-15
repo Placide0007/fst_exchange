@@ -1,10 +1,10 @@
-<header class="flex justify-between z-4 sticky top-0 bg-white items-center px-25 py-2 border-slate-300 border">
+<header class="sticky top-0 z-40 flex items-center justify-between border border-slate-300 bg-white px-5 py-2 md:px-10 lg:px-25">
 
-    <a class="font-bold text-xl" href="{% url 'home' %}">
-        FST 
+    <a class="text-xl font-bold" href="{% url 'home' %}">
+        FST
     </a>
 
-    <nav class="flex gap-5">
+    <nav class="hidden gap-2 md:flex">
 
         <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'home' %}bg-slate-100{% endif %}" href="{% url 'home' %}">
             Accueil
@@ -19,20 +19,18 @@
         </a>
 
         {% if user.is_authenticated %}
-
             <a class="hover:bg-slate-100 p-2 rounded {% if request.resolver_match.url_name == 'profile' %}bg-slate-100{% endif %}" href="{% url 'profile' %}">
-                Mon profil
+                Mon profile
             </a>
-
         {% endif %}
 
     </nav>
 
-    {% if user.is_authenticated %}
+    <div class="hidden md:flex items-center gap-3">
 
-        <div class="flex justify-center gap-3 items-center">
+        {% if user.is_authenticated %}
 
-            <button class="text-start text-xl rounded-full border border-slate-400 flex justify-center items-center h-[45px] w-[45px]">
+            <button class="text-xl rounded-full border border-slate-400 flex justify-center items-center h-[45px] w-[45px]">
                 {{ request.user.username|slice:":2"|upper }}
             </button>
 
@@ -40,14 +38,65 @@
                 Se déconnecter
             </a>
 
-        </div>
+        {% else %}
 
-    {% else %}
+            <a class="hover:bg-slate-200 text-sm transition duration-200 shadow bg-slate-600 hover:text-black text-white p-3" href="{% url 'login' %}">
+                Se connecter
+            </a>
 
-        <a class="hover:bg-slate-200 text-sm transition duration-200 shadow bg-slate-600 hover:text-black text-white p-3" href="{% url 'login' %}">
-            Se connecter
-        </a>
+        {% endif %}
 
-    {% endif %}
+    </div>
+
+    <button id="menu-btn" class="block md:hidden text-2xl p-2">
+        ☰
+    </button>
 
 </header>
+
+<div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-300 px-5 py-4">
+
+    <nav class="flex flex-col gap-2">
+
+        <a class="hover:bg-slate-100 p-2 rounded" href="{% url 'home' %}">
+            Accueil
+        </a>
+
+        <a class="hover:bg-slate-100 p-2 rounded" href="{% url 'about' %}">
+            À propos
+        </a>
+
+        <a class="hover:bg-slate-100 p-2 rounded" href="{% url 'blog' %}">
+            Communauté
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a class="hover:bg-slate-100 p-2 rounded" href="{% url 'profile' %}">
+                Mon profil
+            </a>
+
+            <a class="bg-slate-200 text-sm p-3" href="{% url 'logout' %}">
+                Se déconnecter
+            </a>
+
+        {% else %}
+
+            <a class="bg-slate-600 text-white text-sm p-3" href="{% url 'login' %}">
+                Se connecter
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</div>
+
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>

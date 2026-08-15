@@ -1,3 +1,4 @@
+```html
 {% extends 'base.html' %}
 
 {% load static %}
@@ -10,9 +11,9 @@
 
 {% comment %} hero section {% endcomment %}
 
-<div id="hero" class="grid px-25 border-b z-0 bg-white border-slate-300 grid-cols-2">
+<div id="hero" class="grid px-5 sm:px-8 md:px-12 lg:px-20 xl:px-25 border-b z-0 bg-white border-slate-300 grid-cols-1 lg:grid-cols-2">
 
-    <div class="flex py-15 flex-col gap-3">
+    <div class="flex py-10 sm:py-12 lg:py-15 flex-col gap-3">
 
         <div>
             <button class="text-xs border border-slate-200 p-1 rounded">
@@ -20,21 +21,21 @@
             </button>
         </div>
 
-        <p class="font-extrabold text-[55px] leading-18">
+        <p class="font-extrabold text-4xl sm:text-5xl lg:text-[55px] leading-tight lg:leading-18">
             La communauté scientifique de la Faculté des Sciences
         </p>
 
-        <p class="text-xs leading-5">
+        <p class="text-xs sm:text-sm leading-5 max-w-2xl">
             Un espace collaboratif dédié aux étudiants pour partager leurs connaissances, découvrir les actualités de la faculté et échanger autour de leurs parcours scientifiques.
         </p>
 
-        <div class="flex gap-10">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 mt-2">
 
-            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border" href="{% url 'login' %}">
+            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border text-center" href="{% url 'login' %}">
                 Se Connecter
             </a>
 
-            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border" href="{% url 'blog' %}">
+            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border text-center" href="{% url 'blog' %}">
                 Découvrir la communauté
             </a>
 
@@ -42,9 +43,9 @@
 
     </div>
 
-    <div class="flex justify-center items-center" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-out-back" data-aos-once="true">
+    <div class="flex justify-center items-center py-8 lg:py-0" data-aos="zoom-in-up" data-aos-duration="800" data-aos-easing="ease-out-back" data-aos-once="true">
 
-        <div class="w-full max-w-md md:w-1/2">
+        <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md">
             <img class="w-full h-auto" src="{% static 'images/laptop.svg' %}" alt="Plateforme FST">
         </div>
 
@@ -55,23 +56,23 @@
 
 {% comment %} blog section {% endcomment %}
 
-<div id="jumbotron" class="py-5 px-25">
+<div id="jumbotron" class="py-5 px-5 sm:px-8 md:px-12 lg:px-20 xl:px-25">
 
     <div class="my-4">
 
-        <button class="text-xl underline-offset-4 underline p-1 rounded">
+        <button class="text-lg sm:text-xl underline-offset-4 underline p-1 rounded">
             Actualités & Publications
         </button>
 
     </div>
 
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
         {% for post in posts %}
 
             <a href="{% url 'show' post.id %}" class="block">
 
-                <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white">
+                <div class="flex flex-col h-60 overflow-hidden rounded gap-3 border shadow-sm border-slate-300 p-4 sm:p-5 bg-white">
 
                     <div class="flex justify-between items-center py-2">
 
@@ -99,7 +100,7 @@
                             {{ post.created_at|date:"d M Y" }}
                         </span>
 
-                        <div class="flex gap-3 items-center">
+                        <div class="flex gap-2 sm:gap-3 items-center">
 
                             <div class="flex gap-1.5 items-center px-2 py-1 rounded bg-slate-50 text-slate-400 pointer-events-none">
 
@@ -131,7 +132,7 @@
 
         {% empty %}
 
-            <div class="col-span-3 flex justify-center items-center py-1">
+            <div class="col-span-full flex justify-center items-center py-1">
 
                 <p class="text-sm text-slate-500">
                     Aucune publication pour le moment.
@@ -148,23 +149,23 @@
 
     {% if posts.paginator.num_pages > 1 %}
 
-        <div class="flex justify-center items-center gap-3 mt-8">
+        <div class="flex flex-wrap justify-center items-center gap-3 mt-8">
 
             {% if posts.has_previous %}
 
-                <a href="?page={{ posts.previous_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
+                <a href="?page={{ posts.previous_page_number }}" class="border border-slate-300 px-3 sm:px-4 py-2 rounded hover:bg-slate-100 text-sm">
                     Précédent
                 </a>
 
             {% endif %}
 
-            <span class="text-sm">
+            <span class="text-xs sm:text-sm">
                 Page {{ posts.number }} sur {{ posts.paginator.num_pages }}
             </span>
 
             {% if posts.has_next %}
 
-                <a href="?page={{ posts.next_page_number }}" class="border border-slate-300 px-4 py-2 rounded hover:bg-slate-100">
+                <a href="?page={{ posts.next_page_number }}" class="border border-slate-300 px-3 sm:px-4 py-2 rounded hover:bg-slate-100 text-sm">
                     Suivant
                 </a>
 
@@ -177,3 +178,4 @@
 </div>
 
 {% endblock content %}
+```

@@ -86,9 +86,7 @@
 
                     </div>
 
-                    <p class="font-semibold">
-                        {{ post.title|truncatechars:50 }}
-                    </p>
+                    <p class="font-semibold truncate w-full">{{ post.title|truncatechars:50 }}</p>
 
                     <p class="text-xs leading-5">
                         {{ post.content|truncatechars:150 }}

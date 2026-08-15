@@ -51,38 +51,51 @@
 
     <div class="grid grid-cols-3 gap-5" >
 
-        <a  href="">
-    
-            <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
-        
-                <div class="flex justify-between items-center py-2" >
-                    <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
-                    <span class="text-xs" >6min</span>
-                </div>
-        
-                <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
-        
-                <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
-        
-                <div class="flex justify-between items-center border-t border-slate-100 pt-2" >
-                    <span class="text-xs">13 Aug 2026</span>
-                    
-                    <div class="flex justify-center gap-2 items-center" >
-                        <button class="flex  gap-1 justify-center  items-center p-2  border border-slate-200 rounded" >
-                                <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4">
-                                <span class="text-xs" >23</span>
-                        </button>
+        {% for post in posts %}
 
-                        <button class="flex  gap-1 justify-center  items-center p-2  border border-slate-200 rounded"  >
-                            <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
-                            <span class="text-xs" >3</span>
-                        </button>
+            <a href="">
+
+                <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+
+                    <div class="flex justify-between items-center py-2" >
+                        <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
+                        <span class="text-xs" >{{ post.created_at|date:"H:i" }}</span>
                     </div>
-                </div>
-        
-            </div>
 
-        </a>
+                    <p class="font-semibold" >{{ post.title }}</p>
+
+                    <p class="text-xs leading-5" >{{ post.content }}</p>
+
+                    <div class="flex justify-between items-center border-t border-slate-100 pt-2" >
+                        <span class="text-xs">{{ post.created_at|date:"d M Y" }}</span>
+
+                        <div class="flex justify-center gap-2 items-center" >
+
+                            <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
+                                {% csrf_token %}
+                                <button type="submit" class="flex gap-1 justify-center items-center p-2 rounded cursor-pointer">
+                                    {% if request.user in post.reactions.all %}
+                                        <img src="{% static 'icons/like_full.svg' %}" class="w-4 h-4 icon-liked">
+                                    {% else %}
+                                        <img src="{% static 'icons/like.svg' %}" class="w-4 h-4 icon-liked">
+                                    {% endif %}
+                                    <span class="text-xs reaction-count">{{ post.reactions.count }}</span>
+                                </button>
+                            </form>
+
+                            <button class="flex gap-1 justify-center items-center p-2 rounded" >
+                                <img src="{% static 'icons/comment.svg' %}" class="w-4 h-4">
+                                <span class="text-xs">3</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </a>
+
+        {% endfor %}
 
     </div>
 

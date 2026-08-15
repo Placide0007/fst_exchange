@@ -8,6 +8,32 @@
 
 {% block content %}
 
+<div id="postModal" class="hidden fixed inset-0 z-50 bg-black/50 justify-center items-center">
+
+    <div class="bg-white p-6 w-full max-w-md">
+
+        <button id="closePostModal" class="float-right text-xl cursor-pointer">×</button>
+
+        <h2 class="font-bold text-xl mb-5">Créer un post</h2>
+
+        <form action="{% url 'blog' %}" method="POST" class="flex flex-col gap-3">
+            {% csrf_token %}
+
+            <input type="text" name="title" placeholder="Titre" required
+                   class="border border-slate-300 p-2 w-full">
+
+            <textarea name="content" placeholder="Contenu" required
+                      class="border border-slate-300 p-2 w-full h-32"></textarea>
+
+            <button type="submit" class="bg-slate-800 text-white p-2 cursor-pointer">
+                Publier
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
 <div id="blog" class="grid border-b bg-gray-50 border-slate-300  grid-cols-2" >
 
     <div  class="flex py-10 px-25 flex-col gap-3" >
@@ -33,8 +59,9 @@
 
     </div>
 
-    <div class="flex justify-end items-start py-10 px-20" >
-        <button class="border bg-slate-800 p-3 cursor-pointer text-white  text-xs" >Creer un poste</button>
+
+    <div class="flex justify-end items-start py-10 px-25" >
+        <button id="openPostModal" class="border bg-slate-800 p-3 cursor-pointer text-white text-xs">Creer un poste</button>
     </div>
     
 </div>
@@ -47,33 +74,50 @@
 
     <div class="grid grid-cols-3 gap-5" >
 
-        <a  href="">
-    
-            <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
-        
-                <div class="flex justify-between items-center py-2" >
-                    <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
-                    <span class="text-xs" >6min</span>
-                </div>
-        
-                <p class="font-semibold" >Lorem ipsum dolor sit amet consectetur adipisicing elit Velit quam dolorem dolor.</p>
-        
-                <p class="text-xs leading-5" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quam dolorem dolor labore corporis ad totam at tempora dicta doloribus enim exercitationem odit rerum porro ratione dignissimos, iste ut dolore.</p>
-        
-                <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
-                    <span class="text-xs">13 Aug 2026</span>
-                    <button class="flex gap-1 p-1 rounded" >
-                        <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5">
-                        <span>23</span>
-                    </button>
-                </div>
-        
-            </div>
-            
-        </a>
+        {% for post in posts %}
 
+            <a  href="">
+        
+                <div class="flex flex-col rounded gap-3 border shadow-sm border-slate-300 p-5 bg-white" >
+            
+                    <div class="flex justify-between items-center py-2" >
+                        <button class="text-xs bg-gray-300 p-1 text-gray-900  top-0 left-0" >Innovation</button>
+                        <span class="text-xs" >{{ post.created_at|date:"H:i" }}</span>
+                    </div>
+            
+                    <p class="font-semibold" >{{ post.title }}</p>
+            
+                    <p class="text-xs leading-5" >{{ post.content }}</p>
+            
+                    <div class="flex justify-between items-center border-t border-slate-200 pt-2" >
+
+                        <span class="text-xs">{{ post.created_at|date:"d M Y" }}</span>
+
+                        <form action="{% url 'react_post' post.id %}" method="POST" class="react-form">
+                            {% csrf_token %}
+                            <button type="submit" class="flex gap-1 p-1 rounded cursor-pointer">
+                                {% if request.user in post.reactions.all %}
+                                    <img src="{% static 'icons/like_full.svg' %}" class="w-5 h-5 icon-liked">
+                                {% else %}
+                                    <img src="{% static 'icons/like.svg' %}" class="w-5 h-5 icon-liked">
+                                {% endif %}
+                                <span class="reaction-count">{{ post.reactions.count }}</span>
+                            </button>
+                        </form>
+                        
+                    </div>
+            
+                </div>
+                
+            </a> 
+
+        {% endfor %}
+    
     </div>
     
 </div>
+
+<script defer src="{% static 'core/js/blog.js' %}"></script>
+<script defer src="{% static 'core/js/reaction.js' %}"></script>
 
 {% endblock content %}

@@ -21,8 +21,8 @@
 
             <div>
                 <label for="">Pseudo</label>
-                <input class="mt-1 border border-slate-200 p-4 w-full" type="text" placeholder="Ex:Placide" name="username">
-                <p class="text-xs text-red-500" >{{ form.username.errors.0 }}</p>
+                <input class="mt-1 border border-slate-200 p-4 w-full" type="text" placeholder="Ex:Placide" name="username" value="{{ request.POST.username }}">
+                <p class="text-xs text-red-500 " >{{ form.username.errors.0 }}</p>
             </div>
 
             <div>

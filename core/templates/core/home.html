@@ -31,14 +31,23 @@
 
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 mt-2">
 
-            <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border text-center" href="{% url 'login' %}">
-                Se Connecter
-            </a>
+            {% if {% if user.is_authenticated %} %}
 
-            <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border text-center" href="{% url 'blog' %}">
-                Découvrir la communauté
-            </a>
+                <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border text-center" href="{% url 'blog' %}">
+                    Découvrir la communauté
+                </a>
+                
+                {% else %}
 
+                <a data-aos="zoom-in" class="animate__animated animate__bounce border-slate-400 p-2 border text-center" href="{% url 'login' %}">
+                    Se Connecter
+                </a>
+                
+                <a data-aos="zoom-in" data-aos-delay="200" class="animate__animated animate__bounce bg-slate-900 text-gray-200 p-2 border text-center" href="{% url 'blog' %}">
+                    Découvrir la communauté
+                </a>
+            {% endif %}
+                
         </div>
 
     </div>

@@ -26,12 +26,12 @@
 
     </nav>
 
-    <div class="hidden md:flex items-center gap-3">
+    <div class="hidden md:flex items-center md:justify-center gap-3">
 
         {% if user.is_authenticated %}
 
-            <button class="text-xl rounded-full border border-slate-400 flex justify-center items-center h-[45px] w-[45px]">
-                {{ request.user.username|slice:":2"|upper }}
+            <button class="bg-slate-800 text-sm transition duration-200 shadow text-white p-3" disabled >
+                {{ request.user.username|capitalize }}
             </button>
 
             <a class="bg-slate-200 text-sm transition duration-200 shadow hover:bg-slate-600 hover:text-white p-3" href="{% url 'logout' %}">
